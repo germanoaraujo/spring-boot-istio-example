@@ -1,0 +1,99 @@
+{
+  "info": {
+    "_postman_id": "10ad9586-45f7-2608-f6df-992c7495f887",
+    "name": "Demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "rate-limiting",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Basic dGVzdDp0ZXN0"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://{{GATEWAY_URL}}}}/filter?input=easycheat",
+          "protocol": "https",
+          "host": [
+            "{{GATEWAY_URL}}}}"
+          ],
+          "path": [
+            "filter"
+          ],
+          "query": [
+            {
+              "key": "input",
+              "value": "easycheat"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "whitelist",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "appKey",
+            "value": "key2"
+          }
+        ],
+        "url": {
+          "raw": "https://{{GATEWAY_URL}}}}/hello?name=somename",
+          "protocol": "https",
+          "host": [
+            "{{GATEWAY_URL}}}}"
+          ],
+          "path": [
+            "hello"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "somename"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "request-routing",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://{{GATEWAY_URL}}}}/another?name=somename",
+          "protocol": "https",
+          "host": [
+            "{{GATEWAY_URL}}}}"
+          ],
+          "path": [
+            "another"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "somename"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

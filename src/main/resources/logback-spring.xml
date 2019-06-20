@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2018 Electronic Arts Inc. All rights reserved.
+  -->
+
+<configuration>
+    <springProfile name="prod">
+        <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+        <appender name="KIBANA" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>/var/log/springboot-service/springboot-service.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>/var/log/springboot-service/springboot-service-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+                <maxHistory>1</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%d{yyyy-MM-dd'T'HH:mm:ssXXX, UTC} %-5level [%thread] %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="KIBANA"/>
+        </root>
+
+    </springProfile>
+    <springProfile name="!prod">
+        <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    </springProfile>
+</configuration>

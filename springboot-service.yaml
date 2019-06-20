@@ -1,0 +1,54 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: springboot-service-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-service
+        version: v1
+    spec:
+      containers:
+      - name: springboot-service
+        image: 893895740383.dkr.ecr.us-east-1.amazonaws.com/springboot-service:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: springboot-service-v2
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-service
+        version: v2
+    spec:
+      containers:
+      - name: springboot-service
+        image: 893895740383.dkr.ecr.us-east-1.amazonaws.com/springboot-service:v2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-service
+spec:
+  selector:
+    app: springboot-service
+  ports:
+  - protocol: TCP
+    targetPort: 8080
+    port: 8080
+    name: http
+  - protocol: TCP
+    targetPort: 22
+    port: 22
+    name: ssh

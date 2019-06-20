@@ -1,0 +1,27 @@
+apiVersion: config.istio.io/v1alpha2
+kind: listchecker
+metadata:
+  name: whitelist
+spec:
+  # providerUrl: ordinarily black and white lists are maintained
+  # externally and fetched asynchronously using the providerUrl.
+  overrides: ["key1", "key2"]  # overrides provide a static list
+  blacklist: false
+---
+apiVersion: config.istio.io/v1alpha2
+kind: listentry
+metadata:
+  name: appkey
+spec:
+  value: request.headers["appkey"]
+---
+apiVersion: config.istio.io/v1alpha2
+kind: rule
+metadata:
+  name: checkappkey
+spec:
+  match: request.path.startsWith("/hello")
+  actions:
+  - handler: whitelist.listchecker
+    instances:
+    - appkey.listentry

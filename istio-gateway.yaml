@@ -1,0 +1,40 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-example-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: istio-example
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - istio-example-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /another
+    route:
+    - destination:
+        host: springboot-service
+        port:
+          number: 8080
+        subset: v2
+  - route:
+    - destination:
+        host: springboot-service
+        port:
+          number: 8080
+        subset: v1
