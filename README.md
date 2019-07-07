@@ -55,3 +55,8 @@ https://istio.io/docs/tasks/traffic-management/request-routing/
 ## Reference
 - https://istio.io/docs/concepts/what-is-istio/ 
 - https://blog.envoyproxy.io/service-mesh-data-plane-vs-control-plane-2774e720f7fc
+
+## Slides
+[slides.pdf](https://github.com/jofen-misc/spring-boot-istio-example/blob/master/slides.pdf)
+
+
